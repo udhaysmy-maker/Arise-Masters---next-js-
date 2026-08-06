@@ -698,6 +698,7 @@ function Industries() {
     { title: "MSMEs", desc: "Right-sized leadership programs." },
     { title: "Placement Officers", desc: "Outcome-focused readiness tracks." },
     { title: "Fresh Graduates", desc: "Interview & career acceleration." },
+    { title: "TN Skill Development", desc: "Government-backed skilling & entrepreneurship programs." },
   ];
   return (
     <section id="industries" className="aura relative overflow-hidden py-32 md:py-44">
