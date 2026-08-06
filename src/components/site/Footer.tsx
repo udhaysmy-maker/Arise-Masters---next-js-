@@ -45,6 +45,7 @@ export function Footer() {
           <FooterCol
             title="Services"
             items={[
+              "Soft Skills Training",
               "Corporate Training",
               "Leadership",
               "Placement",
@@ -60,15 +61,15 @@ export function Footer() {
             <ul className="mt-6 space-y-4 text-sm text-white/70">
               <li className="flex items-start gap-3">
                 <Mail size={15} className="mt-0.5 shrink-0 text-primary" />
-                hello@arisemasters.com
+                arisemastersacademy@gmail.com
               </li>
               <li className="flex items-start gap-3">
                 <Phone size={15} className="mt-0.5 shrink-0 text-primary" />
-                +91 98000 00000
+                +91 87541 89669
               </li>
               <li className="flex items-start gap-3">
                 <MapPin size={15} className="mt-0.5 shrink-0 text-primary" />
-                Bengaluru · Mumbai · Chennai
+                Chennai
               </li>
             </ul>
           </div>
@@ -120,7 +121,7 @@ export function Footer() {
                 <MapPin size={18} />
               </span>
               <h4 className="mt-5 font-display text-xl text-white">Find us on the map</h4>
-              <p className="mt-2 text-sm text-white/55">Bengaluru, Karnataka, India</p>
+              <p className="mt-2 text-sm text-white/55">Chennai, Tamil Nadu, India</p>
             </div>
             <span className="relative flex shrink-0 items-center gap-1.5 text-sm font-medium text-white/70 transition-colors duration-300 group-hover:text-white">
               View map

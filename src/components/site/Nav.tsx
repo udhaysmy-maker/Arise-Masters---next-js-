@@ -45,9 +45,9 @@ export function Nav() {
               />
             </span>
             <img
-              src="/assets/logo-wordmark-nav.png"
-              alt="Arise Masters"
-              className="h-4 w-auto xl:h-5"
+              src="/assets/logo-wordmark-tagline.png"
+              alt="Arise Masters — Your Rise Begins Here"
+              className="h-8 w-auto md:h-9 xl:h-10"
             />
           </a>
           <nav className="hidden items-center gap-7 lg:flex">

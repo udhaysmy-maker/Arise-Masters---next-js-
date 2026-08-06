@@ -34,6 +34,7 @@ import {
   X,
   ChevronLeft,
   ChevronRight,
+  User,
 } from "lucide-react";
 
 import { Nav } from "@/components/site/Nav";
@@ -41,7 +42,8 @@ import { Footer } from "@/components/site/Footer";
 import { Reveal, Stagger, StaggerItem } from "@/components/site/Reveal";
 import { Counter } from "@/components/site/Counter";
 
-const heroImg = "/assets/hero.jpg";
+const heroImg = "/assets/ibtc-welcome.jpeg";
+const archanaImg = "/assets/archana-balu.jpeg";
 const aboutImg = "/assets/about.jpg";
 const corporateImg = "/assets/corporate.jpg";
 const collegeImg = "/assets/college.jpg";
@@ -57,6 +59,7 @@ export default function Home() {
       <Hero />
       <TrustedBy />
       <About />
+      <MeetTrainer />
       <Programs />
       <Solutions />
       <WhyChoose />
@@ -78,7 +81,7 @@ export default function Home() {
 const heroStats = [
   { n: 500, s: "+", l: "Training Sessions" },
   { n: 100, s: "+", l: "Corporate Clients" },
-  { n: 10000, s: "+", l: "Professionals Trained" },
+  { n: 1000, s: "+", l: "Professionals Trained" },
   { n: 15, s: "+", l: "Training Programs" },
 ];
 
@@ -127,7 +130,7 @@ function Hero() {
       ref={ref}
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
-      className="relative isolate overflow-hidden pt-32 pb-24 md:pt-40 md:pb-28"
+      className="relative isolate overflow-hidden pt-24 pb-20 md:pt-28 md:pb-24"
     >
       {/* decorative background */}
       <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
@@ -163,7 +166,7 @@ function Hero() {
             <Reveal>
               <span className="inline-flex items-center gap-2 rounded-full border border-ink/10 bg-white/60 px-4 py-1.5 text-xs font-medium tracking-wide text-ink-soft backdrop-blur">
                 <Sparkles size={14} className="text-primary" />
-                Corporate Training · Leadership · Placement
+                Soft Skills Training · Corporate Training · Leadership · Placement
               </span>
             </Reveal>
             <Reveal delay={0.05}>
@@ -177,9 +180,7 @@ function Hero() {
             </Reveal>
             <Reveal delay={0.15}>
               <p className="mt-8 max-w-xl text-balance text-lg leading-relaxed text-ink-soft">
-                Arise Masters is a boutique corporate training and placement
-                consultancy helping enterprises, colleges and MSMEs unlock the
-                full potential of their people.
+                We empower individuals, teams, and organizations with transformative training that builds confidence, enhances communication, and develops future-ready leaders.
               </p>
             </Reveal>
             <Reveal delay={0.25}>
@@ -210,18 +211,17 @@ function Hero() {
 
           {/* RIGHT: image, floating glass cards, certification badge */}
           <Reveal delay={0.2}>
-            <div className="relative mx-auto max-w-lg lg:max-w-none">
+            <div className="relative mx-auto w-fit">
               <motion.div style={{ x: imgX, y: imgY }} className="relative">
                 <div className="absolute -inset-6 -z-10 rounded-[2.5rem] bg-gradient-to-br from-accent/30 via-transparent to-primary/15 blur-2xl" />
-                <div className="group relative overflow-hidden rounded-[2rem] shadow-float ring-1 ring-ink/5">
+                <div className="group relative h-[52vh] max-h-[660px] min-h-[640px] w-fit overflow-hidden rounded-[2rem] shadow-float ring-1 ring-ink/5">
                   <img
                     src={heroImg}
-                    alt="Arise Masters corporate training session in a modern boardroom"
-                    width={1200}
-                    height={1400}
-                    className="h-[440px] w-full object-cover transition-transform duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04] md:h-[540px]"
+                    alt="Welcome poster: Archana Balu, IBTC Certified Trainer & Coach at Arise Masters"
+                    width={1086}
+                    height={1448}
+                    className="h-full w-auto object-contain transition-transform duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04]"
                   />
-                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/25 via-transparent to-transparent" />
                 </div>
               </motion.div>
 
@@ -250,7 +250,7 @@ function Hero() {
               {/* satisfaction card */}
               <motion.div
                 style={{ x: cardFarX, y: cardFarY }}
-                className="pointer-events-none absolute -left-4 bottom-16 hidden sm:block md:-left-10"
+                className="pointer-events-none absolute -left-4 bottom-1 hidden sm:block md:-left-10"
               >
                 <FloatingCard>
                   <p className="text-[11px] uppercase tracking-widest text-ink-soft">Satisfaction</p>
@@ -270,7 +270,7 @@ function Hero() {
                     </span>
                     <div>
                       <p className="font-display text-xl leading-none">
-                        <Counter to={10000} suffix="+" />
+                        <Counter to={1000} suffix="+" />
                       </p>
                       <p className="mt-1 text-[11px] text-ink-soft">Professionals Trained</p>
                     </div>
@@ -329,33 +329,38 @@ function FloatingBadge({ icon: Icon, label }: { icon: any; label: string }) {
 }
 
 /* ---------- TRUSTED BY ---------- */
+const clientLogos = [
+  { src: "/assets/clients/bpcl.png", name: "BPCL" },
+  { src: "/assets/clients/msme.png", name: "MSME" },
+  { src: "/assets/clients/saveetha.png", name: "Saveetha Engineering College" },
+  { src: "/assets/clients/sridevi.png", name: "Sridevi Arts and Science College" },
+  { src: "/assets/clients/srm.png", name: "SRM College Vadapalani" },
+  { src: "/assets/clients/assure.png", name: "Assure E Services" },
+  { src: "/assets/clients/kothari.png", name: "Kothari Group of Companies" },
+  { src: "/assets/clients/maxim.png", name: "Maxim Hydraulic" },
+  { src: "/assets/clients/bng.png", name: "BNG Technology" },
+  { src: "/assets/clients/pushkar.png", name: "Pushkar Properties" },
+  { src: "/assets/clients/goodshepherd.png", name: "Good Shepherd School" },
+  { src: "/assets/clients/mottukal.png", name: "Mottukal NGO" },
+];
+
 function TrustedBy() {
-  const logos = [
-    "TATA · GROUP",
-    "INFOSYS",
-    "WIPRO",
-    "RELIANCE",
-    "L&T",
-    "ITC",
-    "MAHINDRA",
-    "HDFC BANK",
-    "GODREJ",
-  ];
   return (
     <section className="section-seam border-b border-ink/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.9),rgba(255,255,255,0.4))] py-12 backdrop-blur-sm">
       <div className="container-x">
         <p className="text-center text-xs font-semibold uppercase tracking-[0.22em] text-ink-soft">
-          Trusted by leadership teams at
+          Trusted by 1000+ professionals across
         </p>
         <div className="mt-6 overflow-hidden [mask-image:linear-gradient(90deg,transparent,black_10%,black_90%,transparent)]">
-          <div className="marquee-track flex w-max gap-16 pr-16">
-            {[...logos, ...logos].map((l, i) => (
-              <span
+          <div className="marquee-track flex w-max items-center gap-12 pr-12">
+            {[...clientLogos, ...clientLogos].map((l, i) => (
+              <img
                 key={i}
-                className="whitespace-nowrap font-display text-xl tracking-[0.15em] text-ink/50"
-              >
-                {l}
-              </span>
+                src={l.src}
+                alt={l.name}
+                loading="lazy"
+                className="h-12 w-auto shrink-0 object-contain opacity-80 transition duration-300 hover:opacity-100"
+              />
             ))}
           </div>
         </div>
@@ -426,6 +431,108 @@ function About() {
         </div>
       </div>
     </section>
+  );
+}
+
+/* ---------- MEET THE TRAINER ---------- */
+const trainers = [
+  {
+    name: "Archana Balu",
+    role: "Corporate Soft Skills Trainer & Career Coach",
+    credential: "IBTC Certified Trainer & Coach",
+    bio: "5+ years training corporate teams and campus talent — 1000+ professionals coached across communication, leadership, POSH and interview readiness.",
+    img: archanaImg,
+  },
+  {
+    name: "Balu E",
+    role: "Leadership & Project Management Advisor",
+    credential: "30+ Yrs, IGCAR (Dept. of Atomic Energy)",
+    bio: "Three decades as Scientific Officer & Section Director at IGCAR — brings real-world project leadership, engineering rigour and execution discipline into every program.",
+    img: null,
+  },
+  {
+    name: "Jayaseelan Ganesan",
+    role: "Entrepreneurship & Soft Skills Faculty",
+    credential: "MBA, IIM Calcutta",
+    bio: "45+ years across Career Launcher, NSIC (Ministry of MSME) and leading B-schools — veteran faculty in entrepreneurship, whole-brain thinking and organisational psychology.",
+    img: null,
+  },
+];
+
+function MeetTrainer() {
+  return (
+    <section className="section-seam relative overflow-hidden bg-gradient-to-b from-background via-cream to-background py-32 md:py-44">
+      <div className="container-x">
+        <div className="mx-auto max-w-2xl text-center">
+          <Reveal>
+            <SectionEyebrow>Meet Our Trainers</SectionEyebrow>
+          </Reveal>
+          <Reveal delay={0.05}>
+            <h2 className="mt-4 font-display text-[2.5rem] leading-[1.04] tracking-tight md:text-[3.4rem]">
+              The practitioners behind every program.
+            </h2>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <p className="mt-6 text-lg leading-relaxed text-ink-soft">
+              Certified trainers and senior industry advisors bringing decades
+              of real-world expertise into every room.
+            </p>
+          </Reveal>
+        </div>
+
+        <div className="mt-20 grid gap-x-10 gap-y-24 md:grid-cols-3">
+          {trainers.map((t, i) => (
+            <TrainerCard key={t.name} {...t} delay={0.1 + i * 0.08} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function TrainerCard({
+  name,
+  role,
+  credential,
+  bio,
+  img,
+  delay,
+}: {
+  name: string;
+  role: string;
+  credential: string;
+  bio: string;
+  img: string | null;
+  delay: number;
+}) {
+  return (
+    <Reveal delay={delay}>
+      <div className="group relative">
+        <div className="relative overflow-hidden rounded-[2rem] shadow-elevated ring-1 ring-ink/5">
+          {img ? (
+            <img
+              src={img}
+              alt={`${name}, ${role} at Arise Masters`}
+              loading="lazy"
+              className="h-72 w-full object-cover transition-transform duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.05]"
+            />
+          ) : (
+            <div className="flex h-72 w-full items-center justify-center bg-gradient-to-br from-primary/10 via-accent/15 to-cream">
+              <User className="h-16 w-16 text-ink/25" strokeWidth={1.25} />
+            </div>
+          )}
+        </div>
+        <div className="absolute -bottom-6 left-6 right-6 flex items-center gap-2 rounded-2xl bg-white px-4 py-3 shadow-elevated ring-1 ring-ink/5">
+          <Award size={16} className="shrink-0 text-primary" />
+          <p className="text-xs font-semibold leading-snug text-ink">{credential}</p>
+        </div>
+      </div>
+      <div className="mt-10 px-1">
+        <h3 className="font-display text-2xl text-ink">{name}</h3>
+        <p className="mt-1 text-sm font-medium text-primary">{role}</p>
+        <p className="mt-4 text-sm leading-relaxed text-ink-soft">{bio}</p>
+      </div>
+    </Reveal>
   );
 }
 
@@ -1369,9 +1476,9 @@ function Contact() {
             </p>
           </Reveal>
           <div className="mt-10 space-y-5">
-            <ContactRow icon={Mail} label="hello@arisemasters.com" />
-            <ContactRow icon={Phone} label="+91 98000 00000" />
-            <ContactRow icon={MapPin} label="Bengaluru · Mumbai · Chennai" />
+            <ContactRow icon={Mail} label="arisemastersacademy@gmail.com" />
+            <ContactRow icon={Phone} label="+91 87541 89669" />
+            <ContactRow icon={MapPin} label="Chennai" />
           </div>
         </div>
         <Reveal delay={0.1}>
