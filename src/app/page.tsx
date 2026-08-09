@@ -1,7 +1,10 @@
 "use client";
 
-import { motion, useScroll, useTransform, useMotionValue, useSpring, AnimatePresence } from "motion/react";
-import { useEffect, useRef, useState } from "react";
+import { motion, useScroll, useTransform, useMotionValue, useSpring } from "motion/react";
+import { useRef, useState, type FormEvent } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import {
   ArrowRight,
   ArrowUpRight,
@@ -30,27 +33,24 @@ import {
   Layers,
   LineChart,
   Quote,
-  Maximize2,
-  X,
-  ChevronLeft,
-  ChevronRight,
   User,
 } from "lucide-react";
 
 import { Nav } from "@/components/site/Nav";
 import { Footer } from "@/components/site/Footer";
+import { FloatingActions } from "@/components/site/FloatingActions";
 import { Reveal, Stagger, StaggerItem } from "@/components/site/Reveal";
 import { Counter } from "@/components/site/Counter";
+import { SectionEyebrow } from "@/components/site/SectionEyebrow";
+import { GalleryTile } from "@/components/site/GalleryTile";
+import { GalleryLightbox } from "@/components/site/GalleryLightbox";
+import { featuredGalleryImages } from "@/data/gallery";
 
-const heroImg = "/assets/ibtc-welcome.jpeg";
+const heroImg = "/assets/archana-balu-latest.png";
 const archanaImg = "/assets/archana-balu.jpeg";
-const aboutImg = "/assets/about.jpg";
-const corporateImg = "/assets/corporate.jpg";
-const collegeImg = "/assets/college.jpg";
-const g1 = "/assets/g1.jpg";
-const g2 = "/assets/g2.jpg";
-const g3 = "/assets/g3.jpg";
-const g4 = "/assets/g4.jpg";
+const aboutImg = "/assets/about-latest.png";
+const corporateImg = "/assets/corporate.png";
+const collegeImg = "/assets/college.png";
 
 export default function Home() {
   return (
@@ -73,6 +73,7 @@ export default function Home() {
       <Contact />
       <MapSection />
       <Footer />
+      <FloatingActions />
     </div>
   );
 }
@@ -215,11 +216,12 @@ function Hero() {
               <motion.div style={{ x: imgX, y: imgY }} className="relative">
                 <div className="absolute -inset-6 -z-10 rounded-[2.5rem] bg-gradient-to-br from-accent/30 via-transparent to-primary/15 blur-2xl" />
                 <div className="group relative h-[52vh] max-h-[660px] min-h-[640px] w-fit overflow-hidden rounded-[2rem] shadow-float ring-1 ring-ink/5">
-                  <img
+                  <Image
                     src={heroImg}
                     alt="Welcome poster: Archana Balu, IBTC Certified Trainer & Coach at Arise Masters"
                     width={1086}
                     height={1448}
+                    priority
                     className="h-full w-auto object-contain transition-transform duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04]"
                   />
                 </div>
@@ -230,7 +232,7 @@ function Hero() {
                 style={{ x: cardNearX, y: cardNearY }}
                 className="pointer-events-none absolute -left-4 -top-5 hidden sm:block md:-left-8"
               >
-                <FloatingBadge icon={ShieldCheck} label="Certified POSH Trainers" />
+                <FloatingBadge icon={ShieldCheck} label="IBTC Certified Trainer & Coach" />
               </motion.div>
 
               {/* rating card */}
@@ -330,18 +332,18 @@ function FloatingBadge({ icon: Icon, label }: { icon: any; label: string }) {
 
 /* ---------- TRUSTED BY ---------- */
 const clientLogos = [
-  { src: "/assets/clients/bpcl.png", name: "BPCL" },
-  { src: "/assets/clients/msme.png", name: "MSME" },
-  { src: "/assets/clients/saveetha.png", name: "Saveetha Engineering College" },
-  { src: "/assets/clients/sridevi.png", name: "Sridevi Arts and Science College" },
-  { src: "/assets/clients/srm.png", name: "SRM College Vadapalani" },
-  { src: "/assets/clients/assure.png", name: "Assure E Services" },
-  { src: "/assets/clients/kothari.png", name: "Kothari Group of Companies" },
-  { src: "/assets/clients/maxim.png", name: "Maxim Hydraulic" },
-  { src: "/assets/clients/bng.png", name: "BNG Technology" },
-  { src: "/assets/clients/pushkar.png", name: "Pushkar Properties" },
-  { src: "/assets/clients/goodshepherd.png", name: "Good Shepherd School" },
-  { src: "/assets/clients/mottukal.png", name: "Mottukal NGO" },
+  { src: "/assets/clients/bpcl.png", name: "BPCL", w: 179, h: 112 },
+  { src: "/assets/clients/msme.png", name: "MSME", w: 203, h: 112 },
+  { src: "/assets/clients/saveetha.png", name: "Saveetha Engineering College", w: 203, h: 112 },
+  { src: "/assets/clients/sridevi.png", name: "Sridevi Arts and Science College", w: 203, h: 112 },
+  { src: "/assets/clients/srm.png", name: "SRM College Vadapalani", w: 179, h: 112 },
+  { src: "/assets/clients/assure.png", name: "Assure E Services", w: 203, h: 112 },
+  { src: "/assets/clients/kothari.png", name: "Kothari Group of Companies", w: 203, h: 112 },
+  { src: "/assets/clients/maxim.png", name: "Maxim Hydraulic", w: 203, h: 112 },
+  { src: "/assets/clients/bng.png", name: "BNG Technology", w: 179, h: 112 },
+  { src: "/assets/clients/pushkar.png", name: "Pushkar Properties", w: 203, h: 112 },
+  { src: "/assets/clients/goodshepherd.png", name: "Good Shepherd School", w: 203, h: 112 },
+  { src: "/assets/clients/mottukal.png", name: "Mottukal NGO", w: 203, h: 112 },
 ];
 
 function TrustedBy() {
@@ -354,11 +356,12 @@ function TrustedBy() {
         <div className="mt-6 overflow-hidden [mask-image:linear-gradient(90deg,transparent,black_10%,black_90%,transparent)]">
           <div className="marquee-track flex w-max items-center gap-12 pr-12">
             {[...clientLogos, ...clientLogos].map((l, i) => (
-              <img
+              <Image
                 key={i}
                 src={l.src}
                 alt={l.name}
-                loading="lazy"
+                width={l.w}
+                height={l.h}
                 className="h-12 w-auto shrink-0 object-contain opacity-80 transition duration-300 hover:opacity-100"
               />
             ))}
@@ -376,14 +379,13 @@ function About() {
       <div className="container-x grid gap-16 lg:grid-cols-[1fr_1.05fr] lg:items-center">
         <Reveal>
           <div className="relative">
-            <div className="group overflow-hidden rounded-[2rem] shadow-elevated ring-1 ring-ink/5">
-              <img
+            <div className="group relative h-[560px] w-full overflow-hidden rounded-[2rem] shadow-elevated ring-1 ring-ink/5">
+              <Image
                 src={aboutImg}
                 alt="Arise Masters lead trainer engaging with participants"
-                loading="lazy"
-                width={1400}
-                height={1600}
-                className="h-[560px] w-full object-cover transition-transform duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.05]"
+                fill
+                sizes="(min-width: 1024px) 50vw, 100vw"
+                className="object-cover transition-transform duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.05]"
               />
             </div>
             <div className="absolute -bottom-6 -right-6 hidden max-w-xs rounded-2xl bg-ink p-6 text-white shadow-elevated md:block">
@@ -508,16 +510,17 @@ function TrainerCard({
   return (
     <Reveal delay={delay}>
       <div className="group relative">
-        <div className="relative overflow-hidden rounded-[2rem] shadow-elevated ring-1 ring-ink/5">
+        <div className="relative h-72 w-full overflow-hidden rounded-[2rem] shadow-elevated ring-1 ring-ink/5">
           {img ? (
-            <img
+            <Image
               src={img}
               alt={`${name}, ${role} at Arise Masters`}
-              loading="lazy"
-              className="h-72 w-full object-cover transition-transform duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.05]"
+              fill
+              sizes="(min-width: 768px) 33vw, 100vw"
+              className="object-cover transition-transform duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.05]"
             />
           ) : (
-            <div className="flex h-72 w-full items-center justify-center bg-gradient-to-br from-primary/10 via-accent/15 to-cream">
+            <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-primary/10 via-accent/15 to-cream">
               <User className="h-16 w-16 text-ink/25" strokeWidth={1.25} />
             </div>
           )}
@@ -533,15 +536,6 @@ function TrainerCard({
         <p className="mt-4 text-sm leading-relaxed text-ink-soft">{bio}</p>
       </div>
     </Reveal>
-  );
-}
-
-function SectionEyebrow({ children }: { children: React.ReactNode }) {
-  return (
-    <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.22em] text-primary">
-      <span className="h-px w-6 bg-primary" />
-      {children}
-    </span>
   );
 }
 
@@ -793,12 +787,13 @@ function SplitBlock({
       <Reveal>
         <div className="group relative">
           <div className="absolute -inset-4 -z-10 rounded-[2.5rem] bg-gradient-to-br from-accent/25 via-transparent to-primary/10 blur-2xl" />
-          <div className="overflow-hidden rounded-[2rem] shadow-elevated ring-1 ring-ink/5">
-            <img
+          <div className="relative h-[460px] w-full overflow-hidden rounded-[2rem] shadow-elevated ring-1 ring-ink/5">
+            <Image
               src={image}
               alt={title}
-              loading="lazy"
-              className="h-[460px] w-full object-cover transition-transform duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.06]"
+              fill
+              sizes="(min-width: 1024px) 50vw, 100vw"
+              className="object-cover transition-transform duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.06]"
             />
           </div>
         </div>
@@ -1160,13 +1155,6 @@ function TestimonialCard({
 }
 
 /* ---------- GALLERY ---------- */
-const GALLERY_IMAGES = [
-  { src: g1, alt: "Participant taking notes during workshop", title: "Workshop Notes", w: 900, h: 1200 },
-  { src: g2, alt: "Speaker on stage at conference", title: "Keynote Session", w: 900, h: 900 },
-  { src: g3, alt: "Diverse participants laughing during leadership session", title: "Leadership Session", w: 900, h: 1200 },
-  { src: g4, alt: "Handshake across a workshop table", title: "Partnership Moment", w: 900, h: 900 },
-];
-
 // manual masonry columns — interleaved tall/square order per column so seams stagger
 const GALLERY_COLUMNS = [
   [0, 3],
@@ -1188,6 +1176,11 @@ function Gallery() {
               </h2>
             </Reveal>
           </div>
+          <Reveal delay={0.1}>
+            <Link href="/gallery" className="btn-ghost self-start md:self-end">
+              View all moments <ArrowRight size={16} />
+            </Link>
+          </Reveal>
         </div>
 
         <div className="mx-auto grid max-w-sm grid-cols-1 gap-3 sm:max-w-lg sm:grid-cols-2 sm:gap-4 lg:max-w-xl">
@@ -1195,7 +1188,10 @@ function Gallery() {
             <div key={ci} className="flex flex-col gap-3 sm:gap-4">
               {col.map((idx) => (
                 <Reveal key={idx} delay={idx * 0.06}>
-                  <GalleryTile {...GALLERY_IMAGES[idx]} onOpen={() => setLightboxIndex(idx)} />
+                  <GalleryTile
+                    {...featuredGalleryImages[idx]}
+                    onOpen={() => setLightboxIndex(idx)}
+                  />
                 </Reveal>
               ))}
             </div>
@@ -1204,144 +1200,12 @@ function Gallery() {
       </div>
 
       <GalleryLightbox
-        images={GALLERY_IMAGES}
+        images={featuredGalleryImages}
         index={lightboxIndex}
         onClose={() => setLightboxIndex(null)}
         onNavigate={setLightboxIndex}
       />
     </section>
-  );
-}
-
-function GalleryTile({
-  src,
-  alt,
-  title,
-  w,
-  h,
-  onOpen,
-}: {
-  src: string;
-  alt: string;
-  title: string;
-  w: number;
-  h: number;
-  onOpen: () => void;
-}) {
-  return (
-    <button
-      type="button"
-      onClick={onOpen}
-      className="group relative block w-full overflow-hidden rounded-[1.75rem] text-left shadow-soft ring-1 ring-ink/5 transition-shadow duration-500 hover:shadow-elevated"
-    >
-      <img
-        src={src}
-        alt={alt}
-        loading="lazy"
-        width={w}
-        height={h}
-        className="h-auto w-full object-cover transition-transform duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110"
-      />
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/10 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 flex translate-y-3 items-center justify-between p-6 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
-        <span className="font-display text-lg text-white">{title}</span>
-        <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-white/15 text-white backdrop-blur">
-          <Maximize2 size={15} />
-        </span>
-      </div>
-    </button>
-  );
-}
-
-function GalleryLightbox({
-  images,
-  index,
-  onClose,
-  onNavigate,
-}: {
-  images: { src: string; alt: string; title: string }[];
-  index: number | null;
-  onClose: () => void;
-  onNavigate: (i: number) => void;
-}) {
-  const open = index !== null;
-
-  useEffect(() => {
-    if (!open) return;
-    function onKey(e: KeyboardEvent) {
-      if (e.key === "Escape") onClose();
-      if (e.key === "ArrowRight") onNavigate(((index as number) + 1) % images.length);
-      if (e.key === "ArrowLeft") onNavigate(((index as number) - 1 + images.length) % images.length);
-    }
-    window.addEventListener("keydown", onKey);
-    document.body.style.overflow = "hidden";
-    return () => {
-      window.removeEventListener("keydown", onKey);
-      document.body.style.overflow = "";
-    };
-  }, [open, index, images.length, onClose, onNavigate]);
-
-  return (
-    <AnimatePresence>
-      {open && index !== null && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.3 }}
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-ink/92 p-4 backdrop-blur-md md:p-10"
-          onClick={onClose}
-        >
-          <button
-            aria-label="Close"
-            onClick={onClose}
-            className="absolute right-5 top-5 z-10 grid h-11 w-11 place-items-center rounded-full border border-white/15 bg-ink/40 text-white backdrop-blur-sm transition-colors hover:bg-white/10 md:right-8 md:top-8"
-          >
-            <X size={18} />
-          </button>
-
-          <button
-            aria-label="Previous image"
-            onClick={(e) => {
-              e.stopPropagation();
-              onNavigate(((index as number) - 1 + images.length) % images.length);
-            }}
-            className="absolute left-3 top-1/2 z-10 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full border border-white/15 bg-ink/40 text-white backdrop-blur-sm transition-colors hover:bg-white/10 md:left-8"
-          >
-            <ChevronLeft size={20} />
-          </button>
-          <button
-            aria-label="Next image"
-            onClick={(e) => {
-              e.stopPropagation();
-              onNavigate(((index as number) + 1) % images.length);
-            }}
-            className="absolute right-3 top-1/2 z-10 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full border border-white/15 bg-ink/40 text-white backdrop-blur-sm transition-colors hover:bg-white/10 md:right-8"
-          >
-            <ChevronRight size={20} />
-          </button>
-
-          <motion.figure
-            key={index}
-            initial={{ opacity: 0, scale: 0.96, y: 12 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.97 }}
-            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            className="relative max-h-[85vh] max-w-3xl"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <img
-              src={images[index].src}
-              alt={images[index].alt}
-              className="max-h-[75vh] w-auto rounded-2xl object-contain shadow-float"
-            />
-            <figcaption className="mt-4 text-center font-display text-lg text-white">
-              {images[index].title}
-            </figcaption>
-          </motion.figure>
-        </motion.div>
-      )}
-    </AnimatePresence>
   );
 }
 
@@ -1459,7 +1323,49 @@ function CTA() {
 
 /* ---------- CONTACT ---------- */
 function Contact() {
-  const [sent, setSent] = useState(false);
+  const router = useRouter();
+  const [status, setStatus] = useState<"idle" | "submitting" | "error">("idle");
+  const [errorMsg, setErrorMsg] = useState("");
+
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    if (status === "submitting") return;
+
+    const form = e.currentTarget;
+    const data = new FormData(form);
+
+    setStatus("submitting");
+    setErrorMsg("");
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: data.get("name"),
+          email: data.get("email"),
+          company: data.get("company"),
+          size: data.get("size"),
+          message: data.get("msg"),
+          company_website: data.get("company_website"),
+        }),
+      });
+
+      const result = await res.json().catch(() => null);
+
+      if (!res.ok || !result?.success) {
+        setStatus("error");
+        setErrorMsg(result?.error || "Something went wrong. Please try again.");
+        return;
+      }
+
+      router.push("/thank-you");
+    } catch {
+      setStatus("error");
+      setErrorMsg("Something went wrong. Please try again.");
+    }
+  }
+
   return (
     <section id="contact" className="py-32 md:py-44">
       <div className="container-x grid gap-14 lg:grid-cols-[1fr_1.2fr]">
@@ -1483,13 +1389,7 @@ function Contact() {
           </div>
         </div>
         <Reveal delay={0.1}>
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              setSent(true);
-            }}
-            className="card-premium p-9 md:p-10"
-          >
+          <form onSubmit={handleSubmit} className="card-premium p-9 md:p-10">
             <div className="grid gap-5 sm:grid-cols-2">
               <Field label="Full name" name="name" />
               <Field label="Work email" type="email" name="email" />
@@ -1499,13 +1399,25 @@ function Contact() {
             <div className="mt-5">
               <Field label="What would you like to explore?" name="msg" textarea />
             </div>
+            <input
+              type="text"
+              name="company_website"
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden="true"
+              style={{ position: "absolute", left: "-9999px", top: "-9999px", height: 0, width: 0, opacity: 0 }}
+            />
             <button
               type="submit"
-              disabled={sent}
+              disabled={status === "submitting"}
               className="btn-primary mt-8 w-full sm:w-auto"
             >
-              {sent ? "Thanks — we'll be in touch" : "Send message"} <ArrowRight size={16} />
+              {status === "submitting" ? "Sending…" : "Send message"}{" "}
+              <ArrowRight size={16} />
             </button>
+            {status === "error" && (
+              <p className="mt-3 text-sm text-primary">{errorMsg}</p>
+            )}
           </form>
         </Reveal>
       </div>
@@ -1559,18 +1471,52 @@ function Field({
 
 /* ---------- MAP ---------- */
 function MapSection() {
+  const googleMapsUrl =
+    "https://www.google.com/maps/search/?api=1&query=VGN+Projects+Estates+Pvt.+Ltd.,+Y-222,+VGN+Kimberly+Towers,+2nd+Ave,+Y+Block,+Anna+Nagar,+Chennai,+Tamil+Nadu+600040";
+
   return (
-    <section aria-label="Location" className="pb-24">
+    <section aria-label="Location" className="py-24">
       <div className="container-x">
         <Reveal>
-          <div className="overflow-hidden rounded-3xl border border-ink/10 shadow-soft">
-            <iframe
-              title="Arise Masters location"
-              src="https://www.google.com/maps?q=Bengaluru%20India&output=embed"
-              loading="lazy"
-              className="h-[380px] w-full"
-              referrerPolicy="no-referrer-when-downgrade"
-            />
+          <div className="grid gap-12 lg:grid-cols-[1fr_1.1fr] items-center">
+            <div className="space-y-8">
+              <SectionEyebrow>Location</SectionEyebrow>
+              <div className="max-w-xl">
+                <div className="inline-flex items-center gap-3 rounded-full border border-ink/10 bg-cream/80 px-4 py-3 text-sm font-semibold text-ink shadow-soft">
+                  <MapPin size={18} className="text-primary" />
+                  Chennai, Tamil Nadu, India
+                </div>
+                <h2 className="mt-6 font-display text-[2.5rem] leading-[1.04] tracking-tight md:text-[3.4rem]">
+                  Find us on the map
+                </h2>
+                <p className="mt-5 text-lg leading-relaxed text-ink-soft">
+                  Our Chennai office location is shown below. Use the map to explore the exact address and get directions instantly.
+                </p>
+              </div>
+              <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
+                <a
+                  href={googleMapsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-primary inline-flex items-center justify-center !py-3 !px-6 text-sm"
+                >
+                  View on Google Maps
+                  <ArrowUpRight size={16} className="ml-2" />
+                </a>
+                <span className="text-sm text-ink-soft">Opens in a new tab</span>
+              </div>
+            </div>
+            <div className="overflow-hidden rounded-[2rem] border border-ink/10 shadow-soft">
+              <iframe
+                title="Arise Masters Chennai location"
+                src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d1409.331512795473!2d80.21121296796922!3d13.084334146351367!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sNo%2035%2C%20VGN%20Gateway%20Phase%202%2C%20Vedha%20Streeet%2C%20%20Anna%20Nagar%20%2C%20Chennai%20-%20600040!5e1!3m2!1sen!2sin!4v1786238843492!5m2!1sen!2sin"
+                loading="lazy"
+                allowFullScreen
+                className="h-[420px] w-full"
+                style={{ border: 0 }}
+                referrerPolicy="strict-origin-when-cross-origin"
+              />
+            </div>
           </div>
         </Reveal>
       </div>

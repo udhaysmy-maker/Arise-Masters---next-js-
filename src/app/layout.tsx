@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
+import { Preloader } from "@/components/site/Preloader";
+import { CookieConsent } from "@/components/site/CookieConsent";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -65,7 +67,11 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="bg-background text-ink">{children}</body>
+      <body className="bg-background text-ink">
+        <Preloader />
+        {children}
+        <CookieConsent />
+      </body>
     </html>
   );
 }

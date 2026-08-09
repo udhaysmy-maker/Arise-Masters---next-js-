@@ -1,4 +1,5 @@
-import { Instagram, Linkedin, Facebook, Youtube, ArrowUpRight, Mail, Phone, MapPin } from "lucide-react";
+import Image from "next/image";
+import { Instagram, Linkedin, Facebook, Youtube, Mail, Phone, MapPin } from "lucide-react";
 
 export function Footer() {
   return (
@@ -14,8 +15,15 @@ export function Footer() {
           {/* brand */}
           <div>
             <div className="flex items-center gap-3">
-              <span className="grid h-14 w-14 shrink-0 place-items-center rounded-full bg-primary text-white shadow-lg">
-                <span className="font-display text-2xl leading-none">A</span>
+              <span className="relative h-14 w-14 shrink-0 overflow-hidden rounded-full bg-white shadow-lg">
+                <Image
+                  src="/assets/logo-mark.png"
+                  alt="Arise Masters logo mark"
+                  fill
+                  sizes="56px"
+                  className="object-contain"
+                  priority
+                />
               </span>
               <span className="font-display text-2xl text-white md:text-[1.7rem]">
                 Arise Masters
@@ -26,21 +34,52 @@ export function Footer() {
               consulting for companies, colleges and MSMEs. Your rise begins here.
             </p>
             <div className="mt-7 flex gap-3">
-              {[Linkedin, Instagram, Facebook, Youtube].map((Icon, i) => (
-                <a
-                  key={i}
-                  href="#"
-                  className="grid h-11 w-11 place-items-center rounded-full border border-white/15 text-white/70 transition-all duration-300 hover:-translate-y-0.5 hover:border-primary hover:bg-primary hover:text-white"
-                >
-                  <Icon size={16} />
-                </a>
-              ))}
+              <a
+                href="https://www.linkedin.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="grid h-11 w-11 place-items-center rounded-full border border-white/15 text-white/70 transition-all duration-300 hover:-translate-y-0.5 hover:border-primary hover:bg-primary hover:text-white"
+              >
+                <Linkedin size={16} />
+              </a>
+              <a
+                href="https://www.instagram.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="grid h-11 w-11 place-items-center rounded-full border border-white/15 text-white/70 transition-all duration-300 hover:-translate-y-0.5 hover:border-primary hover:bg-primary hover:text-white"
+              >
+                <Instagram size={16} />
+              </a>
+              <a
+                href="https://www.facebook.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="grid h-11 w-11 place-items-center rounded-full border border-white/15 text-white/70 transition-all duration-300 hover:-translate-y-0.5 hover:border-primary hover:bg-primary hover:text-white"
+              >
+                <Facebook size={16} />
+              </a>
+              <a
+                href="https://www.youtube.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="grid h-11 w-11 place-items-center rounded-full border border-white/15 text-white/70 transition-all duration-300 hover:-translate-y-0.5 hover:border-primary hover:bg-primary hover:text-white"
+              >
+                <Youtube size={16} />
+              </a>
             </div>
           </div>
 
           <FooterCol
             title="Quick Links"
-            items={["About", "Trainers", "Careers", "Press", "Contact"]}
+            items={[
+              "Programs",
+              "Industries",
+              "Why Us",
+              "Method",
+              "Stories",
+              "Gallery",
+              "Contact",
+            ]}
           />
           <FooterCol
             title="Services"
@@ -78,59 +117,30 @@ export function Footer() {
         {/* elegant separator */}
         <div className="mt-16 h-px w-full bg-gradient-to-r from-transparent via-white/15 to-transparent" />
 
-        {/* newsletter + map placeholder */}
-        <div className="mt-14 grid gap-6 lg:grid-cols-2">
-          <div className="rounded-[1.75rem] border border-white/10 bg-white/[0.03] p-8">
-            <h4 className="font-display text-xl text-white">Stay ahead of the curve</h4>
-            <p className="mt-2 max-w-sm text-sm text-white/55">
-              Facilitation insights and program updates — no spam, ever.
+        {/* business enquiry CTA */}
+        <div className="mt-14 grid place-items-center">
+          <div className="w-full max-w-3xl rounded-[1.75rem] border border-white/10 bg-white/[0.03] p-8 shadow-[0_30px_80px_rgba(255,255,255,0.02)]">
+            <p className="font-semibold uppercase tracking-[0.28em] text-xs text-primary">
+              LET&apos;S WORK TOGETHER
             </p>
-            <form
-              onSubmit={(e) => e.preventDefault()}
-              className="mt-6 flex max-w-sm items-center gap-2 rounded-full border border-white/15 bg-white/[0.04] p-1.5 pl-5"
-            >
-              <input
-                type="email"
-                required
-                placeholder="Email for insights"
-                className="w-full bg-transparent text-sm text-white placeholder:text-white/40 focus:outline-none"
-              />
-              <button className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-primary text-white transition-transform duration-300 hover:scale-105">
-                <ArrowUpRight size={16} />
-              </button>
-            </form>
-          </div>
+            <h3 className="mt-4 max-w-2xl font-display text-3xl leading-tight text-white md:text-4xl">
+              Let&apos;s build your next learning journey.
+            </h3>
+            <p className="mt-4 max-w-xl text-sm leading-relaxed text-white/70">
+              Tell us what you&apos;re trying to solve, and we&apos;ll help you design the right learning experience for your people.
+            </p>
 
-          <a
-            href="https://www.google.com/maps?q=Bengaluru%20India"
-            target="_blank"
-            rel="noreferrer"
-            className="group relative flex items-center justify-between gap-6 overflow-hidden rounded-[1.75rem] border border-white/10 bg-white/[0.03] p-8 transition-colors duration-300 hover:border-white/20"
-          >
-            <div
-              aria-hidden
-              className="pointer-events-none absolute inset-0 opacity-40 transition-opacity duration-500 group-hover:opacity-60"
-              style={{
-                backgroundImage:
-                  "linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px)",
-                backgroundSize: "26px 26px",
-              }}
-            />
-            <div className="relative">
-              <span className="grid h-11 w-11 place-items-center rounded-full bg-primary text-white shadow-lg transition-transform duration-500 group-hover:scale-110">
-                <MapPin size={18} />
-              </span>
-              <h4 className="mt-5 font-display text-xl text-white">Find us on the map</h4>
-              <p className="mt-2 text-sm text-white/55">Chennai, Tamil Nadu, India</p>
-            </div>
-            <span className="relative flex shrink-0 items-center gap-1.5 text-sm font-medium text-white/70 transition-colors duration-300 group-hover:text-white">
-              View map
-              <ArrowUpRight
-                size={15}
-                className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-              />
-            </span>
-          </a>
+            <a
+              href="/#contact"
+              className="mt-8 inline-flex items-center justify-center rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white transition-transform duration-300 hover:-translate-y-0.5 hover:bg-primary/90"
+            >
+              Start a conversation ↗
+            </a>
+
+            <p className="mt-4 max-w-sm text-sm text-white/55">
+              Corporate training • Leadership development • Academic programs
+            </p>
+          </div>
         </div>
 
         <div className="mt-16 flex flex-col items-start justify-between gap-4 border-t border-white/10 pt-6 text-xs text-white/50 md:flex-row md:items-center">
@@ -147,6 +157,22 @@ export function Footer() {
 }
 
 function FooterCol({ title, items }: { title: string; items: string[] }) {
+  const linkMap: Record<string, string> = {
+    Programs: "/#programs",
+    Industries: "/#industries",
+    "Why Us": "/#why",
+    Method: "/#methodology",
+    Stories: "/#stories",
+    Gallery: "/gallery",
+    Contact: "/#contact",
+    "Soft Skills Training": "/#programs",
+    "Corporate Training": "/#programs",
+    Leadership: "/#programs",
+    Placement: "/#programs",
+    "POSH Training": "/#programs",
+    "HR Programs": "/#programs",
+  };
+
   return (
     <div>
       <h4 className="text-xs font-semibold uppercase tracking-[0.2em] text-white/45">
@@ -156,7 +182,7 @@ function FooterCol({ title, items }: { title: string; items: string[] }) {
         {items.map((i) => (
           <li key={i}>
             <a
-              href="#"
+              href={linkMap[i] ?? "#"}
               className="group inline-flex items-center gap-1.5 transition-colors duration-300 hover:text-white"
             >
               <span className="h-px w-0 bg-primary transition-all duration-300 group-hover:w-3" />

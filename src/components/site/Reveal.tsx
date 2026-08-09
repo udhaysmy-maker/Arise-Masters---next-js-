@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, type Variants } from "motion/react";
-import type { ReactNode } from "react";
+import { useMemo, type ReactNode } from "react";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -26,7 +26,7 @@ export function Reveal({
   className?: string;
   as?: any;
 }) {
-  const MotionTag = motion(As);
+  const MotionTag = useMemo(() => motion(As), [As]);
   return (
     <MotionTag
       className={className}

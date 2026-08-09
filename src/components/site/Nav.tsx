@@ -2,14 +2,16 @@
 
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
+import Image from "next/image";
 
 const links = [
-  { href: "#programs", label: "Programs" },
-  { href: "#industries", label: "Industries" },
-  { href: "#why", label: "Why Us" },
-  { href: "#methodology", label: "Method" },
-  { href: "#stories", label: "Stories" },
-  { href: "#contact", label: "Contact" },
+  { href: "/#programs", label: "Programs" },
+  { href: "/#industries", label: "Industries" },
+  { href: "/#why", label: "Why Us" },
+  { href: "/#methodology", label: "Method" },
+  { href: "/#stories", label: "Stories" },
+  { href: "/gallery", label: "Gallery" },
+  { href: "/#contact", label: "Contact" },
 ];
 
 export function Nav() {
@@ -35,18 +37,24 @@ export function Nav() {
             scrolled ? "glass shadow-soft" : ""
           }`}
         >
-          <a href="#top" className="flex items-center gap-2.5">
-            <span className="grid h-13 w-13 shrink-0 place-items-center rounded-full bg-white p-0 ring-1 ring-ink/10 shadow-sm">
-              <img
+          <a href="/" className="flex items-center gap-2.5">
+            <span className="relative grid h-13 w-13 shrink-0 place-items-center rounded-full bg-white p-0 ring-1 ring-ink/10 shadow-sm">
+              <Image
                 src="/assets/logo-mark.png"
                 alt=""
                 aria-hidden
-                className="h-full w-full object-contain"
+                fill
+                sizes="52px"
+                priority
+                className="object-contain"
               />
             </span>
-            <img
+            <Image
               src="/assets/logo-wordmark-tagline.png"
               alt="Arise Masters — Your Rise Begins Here"
+              width={1131}
+              height={195}
+              priority
               className="h-8 w-auto md:h-9 xl:h-10"
             />
           </a>
@@ -61,7 +69,7 @@ export function Nav() {
               </a>
             ))}
           </nav>
-          <a href="#contact" className="hidden lg:inline-flex btn-primary !py-2.5 !px-5 text-sm">
+          <a href="/#contact" className="hidden lg:inline-flex btn-primary !py-2.5 !px-5 text-sm">
             Book Consultation
           </a>
           <button
@@ -86,7 +94,7 @@ export function Nav() {
                 </a>
               ))}
               <a
-                href="#contact"
+                href="/#contact"
                 onClick={() => setOpen(false)}
                 className="btn-primary mt-2 text-sm"
               >
