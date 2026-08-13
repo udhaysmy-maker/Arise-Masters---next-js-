@@ -67,7 +67,7 @@ export default function Home() {
       <Industries />
       <Stories />
       <Testimonials />
-      <Gallery />
+      {/* <Gallery /> temporarily hidden — uncomment to restore */}
       <FAQ />
       <CTA />
       <Contact />
