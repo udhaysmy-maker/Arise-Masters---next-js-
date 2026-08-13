@@ -10,7 +10,7 @@ const links = [
   { href: "/#why", label: "Why Us" },
   { href: "/#methodology", label: "Method" },
   { href: "/#stories", label: "Stories" },
-  { href: "/gallery", label: "Gallery" },
+  // { href: "/gallery", label: "Gallery" }, // temporarily hidden — uncomment to restore
   { href: "/#contact", label: "Contact" },
 ];
 
