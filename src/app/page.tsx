@@ -34,6 +34,7 @@ import {
   LineChart,
   Quote,
   User,
+  Rocket,
 } from "lucide-react";
 
 import { Nav } from "@/components/site/Nav";
@@ -59,6 +60,7 @@ export default function Home() {
       <Hero />
       <TrustedBy />
       <About />
+      <Breakthrough />
       <MeetTrainer />
       <Programs />
       <Solutions />
@@ -399,30 +401,41 @@ function About() {
 
         <div>
           <Reveal>
-            <SectionEyebrow>How We Help</SectionEyebrow>
+            <SectionEyebrow>Our Vision & Mission</SectionEyebrow>
           </Reveal>
           <Reveal delay={0.05}>
             <h2 className="mt-4 font-display text-[2.5rem] leading-[1.04] tracking-tight md:text-[3.4rem]">
-              A boutique training studio for the modern enterprise.
+              India's most sought-after force in corporate human transformation.
             </h2>
           </Reveal>
           <Reveal delay={0.1}>
             <p className="mt-6 text-lg leading-relaxed text-ink-soft">
-              We partner with leadership teams, HR functions and academic
-              institutions to design measurable learning journeys. From
-              behavioural science to placement readiness, every engagement is
-              tailored, facilitated by industry practitioners, and designed to
-              move the needle on culture and performance.
+              Our brand promise: every person who walks in for training, walks
+              out with their rise already begun. We're your one place for
+              everything — behavioural training, personality development,
+              team-building, leadership training, public speaking, emotional
+              intelligence, and personalized interview coaching for
+              government, PSU, IT, and corporate roles.
+            </p>
+          </Reveal>
+          <Reveal delay={0.13}>
+            <p className="mt-4 text-base leading-relaxed text-ink-soft">
+              <span className="font-medium text-ink">Our Mission — </span>
+              At Arise Masters, we exist to turn ordinary teams into
+              unstoppable ones. We combine certified expertise, experiential
+              learning, and bold facilitation to build workplaces and
+              transform individuals defined by trust, emotional intelligence,
+              and relentless collaboration.
             </p>
           </Reveal>
           <div className="mt-10 grid gap-6 sm:grid-cols-2">
             {[
-              ["People-first design", "Programs built around learner behaviour, not slides."],
-              ["Practitioner faculty", "Facilitators from Fortune 500 leadership rooms."],
-              ["Measured outcomes", "Every engagement ships with a KPI scorecard."],
-              ["Truly customised", "Content shaped to your industry and maturity."],
+              ["Activity-driven learning", "High-impact learning that creates visible behavioral change — not another forgettable offsite."],
+              ["Certified compliance training", "Safer, more respectful workplaces through certified POSH and POCSO training."],
+              ["Entrepreneurial leaders", "Cultivating entrepreneurial thinkers and emotionally intelligent leaders at every level."],
+              ["Proven ROI", "Measurable shifts in team performance — not just smiles on a feedback form."],
             ].map(([t, d], i) => (
-              <Reveal key={t} delay={0.12 + i * 0.06}>
+              <Reveal key={t} delay={0.18 + i * 0.06}>
                 <div className="card-premium !rounded-2xl p-6">
                   <p className="font-medium text-ink">{t}</p>
                   <p className="mt-1 text-sm text-ink-soft">{d}</p>
@@ -436,14 +449,39 @@ function About() {
   );
 }
 
+/* ---------- BREAKTHROUGH STATEMENT ---------- */
+function Breakthrough() {
+  return (
+    <section className="relative overflow-hidden bg-ink py-24 text-white md:py-32">
+      <div className="pointer-events-none absolute inset-0 -z-0">
+        <div className="floaty-slow absolute -left-24 top-1/2 h-[380px] w-[380px] -translate-y-1/2 rounded-full bg-primary/20 blur-3xl" />
+        <div className="floaty absolute -right-24 top-1/2 h-[320px] w-[320px] -translate-y-1/2 rounded-full bg-accent/10 blur-3xl" />
+      </div>
+      <div className="container-x relative">
+        <Reveal>
+          <div className="mx-auto max-w-3xl text-center">
+            <Quote size={26} className="mx-auto text-primary" strokeWidth={1.5} />
+            <p className="mt-6 font-display text-3xl leading-[1.15] tracking-tight md:text-5xl">
+              We don&apos;t run training sessions.
+              <br />
+              We engineer breakthroughs.
+            </p>
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
 /* ---------- MEET THE TRAINER ---------- */
 const trainers = [
   {
     name: "Archana Balu",
-    role: "Corporate Soft Skills Trainer & Career Coach",
-    credential: "IBTC Certified Trainer & Coach",
-    bio: "5+ years training corporate teams and campus talent — 1000+ professionals coached across communication, leadership, POSH and interview readiness.",
+    role: "Founder & Corporate Facilitator",
+    credential: "Certified HR Business Partner & POSH/POCSO Trainer",
+    bio: "10+ years across HR and corporate training — the credibility of someone who has actually lived the pressures she now helps teams overcome. Every session is bold, immersive, and built to leave a mark long after the workshop badge comes off.",
     img: archanaImg,
+    href: "/trainers/archana-balu",
   },
   {
     name: "Balu E",
@@ -499,6 +537,7 @@ function TrainerCard({
   bio,
   img,
   delay,
+  href,
 }: {
   name: string;
   role: string;
@@ -506,6 +545,7 @@ function TrainerCard({
   bio: string;
   img: string | null;
   delay: number;
+  href?: string;
 }) {
   return (
     <Reveal delay={delay}>
@@ -534,6 +574,15 @@ function TrainerCard({
         <h3 className="font-display text-2xl text-ink">{name}</h3>
         <p className="mt-1 text-sm font-medium text-primary">{role}</p>
         <p className="mt-4 text-sm leading-relaxed text-ink-soft">{bio}</p>
+        {href && (
+          <Link
+            href={href}
+            className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-primary transition-all duration-300 hover:gap-3"
+          >
+            View full profile
+            <ArrowUpRight size={15} />
+          </Link>
+        )}
       </div>
     </Reveal>
   );
@@ -570,16 +619,18 @@ const PROGRAM_THEMES = [
 function Programs() {
   const items = [
     { icon: Users, title: "Behavioural Training", desc: "Rewire mindsets, habits and team dynamics through experiential learning." },
-    { icon: TrendingUp, title: "Leadership Skills", desc: "Grow decisive, empathetic leaders ready for the next horizon." },
+    { icon: TrendingUp, title: "Leadership & Emotional Intelligence", desc: "Built for leaders who refuse to settle — decisive, empathetic leadership ready for the next horizon." },
     { icon: MessageSquare, title: "Communication Skills", desc: "Clear, confident, high-impact communication for every level." },
     { icon: Sparkles, title: "Personality Development", desc: "Build the presence and polish that opens rooms." },
     { icon: Mic, title: "Public Speaking", desc: "From stage-fright to standing ovations — structured storytelling." },
-    { icon: ShieldCheck, title: "POSH Training", desc: "Certified prevention of sexual harassment programs for workplaces." },
-    { icon: UserCheck, title: "Interview Skills", desc: "Interview mastery for freshers and mid-career professionals." },
+    { icon: ShieldCheck, title: "POSH & POCSO Training", desc: "Certified prevention-of-harassment and child-protection training that builds a workplace people trust." },
+    { icon: UserCheck, title: "Interview Skills", desc: "Interview mastery for freshers and mid-career professionals.", href: "/programs/interview-coaching" },
+    { icon: Handshake, title: "Team Building", desc: "RISE TOGETHER — our signature experiential team-building program.", href: "/programs/rise-together" },
+    { icon: Rocket, title: "Entrepreneurship Track", desc: "Think Like an Owner — innovation, accountability and risk-taking, built into every level of the org.", href: "/programs/rise-together" },
     { icon: Briefcase, title: "Sales Training", desc: "Consultative selling, negotiation and pipeline discipline." },
     { icon: GraduationCap, title: "Placement Training", desc: "End-to-end campus readiness — aptitude to attitude." },
-    { icon: Handshake, title: "Corporate Soft Skills", desc: "The behavioural fabric that holds high-performing teams together." },
-    { icon: Building2, title: "Corporate HR Training", desc: "Modernise the HR function with practitioner-led workshops." },
+    { icon: Layers, title: "Corporate Soft Skills", desc: "The behavioural fabric that holds high-performing teams together." },
+    { icon: Building2, title: "Corporate HR Training", desc: "Where high-performing cultures are built — on purpose. Modernise the HR function with practitioner-led workshops." },
     { icon: Wrench, title: "Customised Workshops", desc: "Bespoke journeys built around your outcomes and audience." },
   ];
 
@@ -624,17 +675,24 @@ function ProgramCard({
   title,
   desc,
   index,
+  href,
 }: {
   icon: any;
   title: string;
   desc: string;
   index: number;
+  href?: string;
 }) {
   const theme = PROGRAM_THEMES[index % PROGRAM_THEMES.length];
   const number = String(index + 1).padStart(2, "0");
+  const Wrapper = href ? Link : "div";
+  const wrapperProps = href ? { href } : {};
 
   return (
-    <div className="group relative h-full rounded-[1.75rem] transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1.5 hover:scale-[1.02]">
+    <Wrapper
+      {...(wrapperProps as any)}
+      className="group relative block h-full rounded-[1.75rem] transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1.5 hover:scale-[1.02]"
+    >
       {/* animated rotating gradient border */}
       <div className="absolute inset-0 overflow-hidden rounded-[1.75rem]">
         <div
@@ -677,7 +735,7 @@ function ProgramCard({
           />
         </div>
       </div>
-    </div>
+    </Wrapper>
   );
 }
 
