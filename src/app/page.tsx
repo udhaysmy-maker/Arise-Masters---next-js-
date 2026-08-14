@@ -49,6 +49,7 @@ import { featuredGalleryImages } from "@/data/gallery";
 
 const heroImg = "/assets/archana-balu-latest.png";
 const archanaImg = "/assets/archana-balu.jpeg";
+const baluEImg = "/assets/balu-e.jpeg";
 const aboutImg = "/assets/about-latest.png";
 const corporateImg = "/assets/corporate.png";
 const collegeImg = "/assets/college.png";
@@ -488,7 +489,8 @@ const trainers = [
     role: "Leadership & Project Management Advisor",
     credential: "30+ Yrs, IGCAR (Dept. of Atomic Energy)",
     bio: "Three decades as Scientific Officer & Section Director at IGCAR — brings real-world project leadership, engineering rigour and execution discipline into every program.",
-    img: null,
+    img: baluEImg,
+    imgPosition: "object-top" as const,
   },
   {
     name: "Jayaseelan Ganesan",
@@ -538,6 +540,7 @@ function TrainerCard({
   img,
   delay,
   href,
+  imgPosition = "object-center",
 }: {
   name: string;
   role: string;
@@ -546,6 +549,7 @@ function TrainerCard({
   img: string | null;
   delay: number;
   href?: string;
+  imgPosition?: string;
 }) {
   return (
     <Reveal delay={delay}>
@@ -557,7 +561,7 @@ function TrainerCard({
               alt={`${name}, ${role} at Arise Masters`}
               fill
               sizes="(min-width: 768px) 33vw, 100vw"
-              className="object-cover transition-transform duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.05]"
+              className={`object-cover ${imgPosition} transition-transform duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.05]`}
             />
           ) : (
             <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-primary/10 via-accent/15 to-cream">
