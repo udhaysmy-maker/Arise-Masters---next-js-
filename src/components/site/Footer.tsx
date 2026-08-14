@@ -77,7 +77,7 @@ export function Footer() {
               "Why Us",
               "Method",
               "Stories",
-              "Gallery",
+              // "Gallery", // temporarily hidden — uncomment to restore
               "Contact",
             ]}
           />

@@ -46,11 +46,13 @@ import { GalleryTile } from "@/components/site/GalleryTile";
 import { GalleryLightbox } from "@/components/site/GalleryLightbox";
 import { featuredGalleryImages } from "@/data/gallery";
 
-const heroImg = "/assets/archana-balu-latest.png";
+const heroImg = "/assets/g2.jpg";
 const archanaImg = "/assets/archana-balu.jpeg";
-const aboutImg = "/assets/about-latest.png";
+const aboutImg = "/assets/about.jpg";
 const corporateImg = "/assets/corporate.png";
 const collegeImg = "/assets/college.png";
+const baluImg = "/assets/balu-e.jpeg";
+const jayaseelanImg = "/assets/jayaseelan.jpeg";
 
 export default function Home() {
   return (
@@ -450,14 +452,16 @@ const trainers = [
     role: "Leadership & Project Management Advisor",
     credential: "30+ Yrs, IGCAR (Dept. of Atomic Energy)",
     bio: "Three decades as Scientific Officer & Section Director at IGCAR — brings real-world project leadership, engineering rigour and execution discipline into every program.",
-    img: null,
+    img: baluImg,
+    imgPosition: "object-top" as const,
   },
   {
     name: "Jayaseelan Ganesan",
     role: "Entrepreneurship & Soft Skills Faculty",
     credential: "MBA, IIM Calcutta",
     bio: "45+ years across Career Launcher, NSIC (Ministry of MSME) and leading B-schools — veteran faculty in entrepreneurship, whole-brain thinking and organisational psychology.",
-    img: null,
+    img: jayaseelanImg,
+    imgPosition: "object-top" as const,
   },
 ];
 
@@ -499,6 +503,7 @@ function TrainerCard({
   bio,
   img,
   delay,
+  imgPosition = "object-center",
 }: {
   name: string;
   role: string;
@@ -506,6 +511,7 @@ function TrainerCard({
   bio: string;
   img: string | null;
   delay: number;
+  imgPosition?: string;
 }) {
   return (
     <Reveal delay={delay}>
@@ -517,7 +523,7 @@ function TrainerCard({
               alt={`${name}, ${role} at Arise Masters`}
               fill
               sizes="(min-width: 768px) 33vw, 100vw"
-              className="object-cover transition-transform duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.05]"
+              className={`object-cover ${imgPosition} transition-transform duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.05]`}
             />
           ) : (
             <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-primary/10 via-accent/15 to-cream">
